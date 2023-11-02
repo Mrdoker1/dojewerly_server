@@ -128,14 +128,14 @@ export class UserController {
     const resend = new Resend('re_HU4mWcUi_L9QHcMEhwDQku3Zd2U4YTmBk');
 
     resend.emails.send({
-      from: 'no-reply@yourapp.com',
+      from: 'dojewerlyserver-production.up.railway.app',
       to: newUser.email,
       subject: 'Please confirm your email DEFAULT',
       html: htmlContent,
     });
 
     await this.resendService.send({
-      from: 'no-reply@yourapp.com',
+      from: 'dojewerlyserver-production.up.railway.app',
       to: newUser.email,
       subject: 'Please confirm your email CUSTOM',
       html: htmlContent,
