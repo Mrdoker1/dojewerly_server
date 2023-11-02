@@ -119,7 +119,7 @@ export class UserController {
     const newUser = await this.userService.createUser(createUserDto);
 
     // Подготовка и отправка письма
-    const confirmUrl = `https://yourapp.com/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
+    const confirmUrl = `dojewerlyserver-production.up.railway.app/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
     const htmlContent = this.templateService.getConfirmationTemplate({
       name: newUser.username,
       url: confirmUrl,
