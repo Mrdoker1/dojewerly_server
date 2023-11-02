@@ -32,10 +32,18 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+import { ResendService } from 'nestjs-resend';
+import { TemplateService } from '../mail/template.service';
+import { Resend } from 'resend';
+
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly resendService: ResendService, // Добавьте это
+    private readonly templateService: TemplateService, // и это
+  ) {}
 
   @Get()
   @ApiOperation({ summary: 'Get all users (only available to admin)' })
@@ -105,10 +113,35 @@ export class UserController {
       createUserDto.email,
     );
     if (existingUser) {
-      throw new BadRequestException('Email is already taken');
+      throw new BadRequestException('Email is already taken!');
     }
-    // Create the user with the provided data
-    return this.userService.createUser(createUserDto);
+    // Создание пользователя
+    const newUser = await this.userService.createUser(createUserDto);
+
+    // Подготовка и отправка письма
+    const confirmUrl = `https://yourapp.com/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
+    const htmlContent = this.templateService.getConfirmationTemplate({
+      name: newUser.username,
+      url: confirmUrl,
+    });
+
+    const resend = new Resend('re_HU4mWcUi_L9QHcMEhwDQku3Zd2U4YTmBk');
+
+    resend.emails.send({
+      from: 'no-reply@yourapp.com',
+      to: newUser.email,
+      subject: 'Please confirm your email DEFAULT',
+      html: htmlContent,
+    });
+
+    await this.resendService.send({
+      from: 'no-reply@yourapp.com',
+      to: newUser.email,
+      subject: 'Please confirm your email CUSTOM',
+      html: htmlContent,
+    });
+
+    return newUser;
   }
 
   @Post()

@@ -12,6 +12,10 @@ import { CriteriaModule } from './catalog/criteria.module';
 import { ArticlesModule } from './article/articles.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MailModule } from './mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
+import { ResendModule } from 'nestjs-resend';
+import { TemplateService } from 'src/mail/template.service';
 
 @Module({
   imports: [
@@ -27,8 +31,15 @@ import { join } from 'path';
     FavouritesModule,
     CriteriaModule,
     ArticlesModule,
+    MailModule,
+    ConfigModule.forRoot({
+      isGlobal: true, // no need to import into other modules
+    }),
+    ResendModule.forRoot({
+      apiKey: process.env.RESEND_API_KEY, // Использование переменной окружения
+    }),
   ],
   controllers: [AppController, UserController],
-  providers: [AppService],
+  providers: [AppService, TemplateService],
 })
 export class AppModule {}
