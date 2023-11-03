@@ -3,11 +3,8 @@
 <head>
   <title>Welcome to DoJewelry.shop</title>
   <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;1,500&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;1,400&display=swap');
-
     body {
-      font-family: 'Jost', Arial, sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #F4F4F2;
       color: #161412;
       margin: 0;
@@ -42,23 +39,29 @@
       display: inline-block;
       margin: 20px 0;
     }
-    h1, h2 {
-      font-family: 'Cormorant', Georgia, 'Times New Roman', serif;
+    .button:hover{
+        background-color: #272727;
+    }
+    img.logo {
+      display: block;
+      margin: auto;
+    }
+    a, a:visited, a:hover, a:active {
+      text-decoration: none;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>
-          <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.svg" alt="DoJewelry" width="89" height="29" style="display: block;"/>
-      </h1>
+      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
     </div>
     <div class="content">
-      <h2>Dear {{name}},</h2>
+      <h2>Dear {{username}},</h2>
       <p>Thank you for registering at DoJewelry.shop. We're excited to have you on board!</p>
       <p>To activate your account please click the button below:</p>
-      <a href="{{url}}" class="button">Activate Account</a>
+      <a href="{{activationLink}}" class="button">Activate Account</a>
       <p>If you did not sign up for this account, you can ignore this email and the account will not be activated.</p>
       <p>Regards,<br>The DoJewelry Team</p>
     </div>

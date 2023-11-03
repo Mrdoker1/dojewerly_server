@@ -133,8 +133,8 @@ export class UserController {
     // Подготовка и отправка письма
     const confirmUrl = `https://dojewerlyserver-production.up.railway.app/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
     const htmlContent = this.templateService.getConfirmationTemplate({
-      name: newUser.username,
-      url: confirmUrl,
+      username: newUser.username,
+      activationLink: confirmUrl,
     });
 
     await this.resendService.send({

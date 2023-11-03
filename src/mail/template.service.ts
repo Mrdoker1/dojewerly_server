@@ -17,7 +17,10 @@ export class TemplateService {
     return template(context);
   }
 
-  public getConfirmationTemplate(data: { name: string; url: string }): string {
+  public getConfirmationTemplate(data: {
+    username: string;
+    activationLink: string;
+  }): string {
     return this.compileTemplate('confirmation', data);
   }
 }
