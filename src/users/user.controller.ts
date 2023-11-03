@@ -17,7 +17,7 @@ import {
   UpdateProfileDto,
   UpdateUserDto,
 } from '../dto/user.dto';
-import { UserDocument } from './user.model';
+import { User, UserDocument } from './user.model';
 import { UserRole } from '../enum/enums';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
@@ -35,6 +35,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ResendService } from 'nestjs-resend';
 import { TemplateService } from '../mail/template.service';
 import { Resend } from 'resend';
+import { MailService } from 'src/mail/mail.service';
 
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
 @Controller('users')
@@ -43,6 +44,7 @@ export class UserController {
     private readonly userService: UserService,
     private readonly resendService: ResendService, // Добавьте это
     private readonly templateService: TemplateService, // и это
+    private readonly mailService: MailService, // и это
   ) {}
 
   @Get()
@@ -115,8 +117,18 @@ export class UserController {
     if (existingUser) {
       throw new BadRequestException('Email is already taken!');
     }
-    // Создание пользователя
-    const newUser = await this.userService.createUser(createUserDto);
+
+    const newUser = {
+      email: 'fixrapdok@gmail.com',
+      username: 'EMAIL_TEST',
+      password: '1111',
+      role: 'user',
+      favorites: {},
+      settings: { email: true },
+    } as User;
+
+    // // Создание пользователя
+    // const newUser = await this.userService.createUser(createUserDto);
 
     // Подготовка и отправка письма
     const confirmUrl = `https://dojewerlyserver-production.up.railway.app/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
@@ -125,19 +137,10 @@ export class UserController {
       url: confirmUrl,
     });
 
-    const resend = new Resend('re_HU4mWcUi_L9QHcMEhwDQku3Zd2U4YTmBk');
-
-    resend.emails.send({
-      from: 'dojewerlyserver-production.up.railway.app',
-      to: newUser.email,
-      subject: 'Please confirm your email DEFAULT',
-      html: htmlContent,
-    });
-
     await this.resendService.send({
-      from: 'dojewerlyserver-production.up.railway.app',
+      from: 'support@dojewerly.shop',
       to: newUser.email,
-      subject: 'Please confirm your email CUSTOM',
+      subject: 'Please confirm your DoJewerly email',
       html: htmlContent,
     });
 
