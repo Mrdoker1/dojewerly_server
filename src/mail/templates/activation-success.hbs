@@ -19,12 +19,14 @@
       border-radius: 8px;
       overflow: hidden;
       padding: 40px;
+      color: #000;
     }
     .header, .content, .footer {
       text-align: center;
     }
-    h2 {
-      font-family: 'Cormorant', serif;
+    h1 {
+      font-family: 'Jost', sans-serif;
+      font-weight:400;
     }
     span {
       font-size: 13px;
@@ -45,6 +47,10 @@
     .success {
       color: #00c784;
     }
+    .note {
+      color: #bdbdbd;
+      font-size: 12px;
+    }
     .logo {
       margin-bottom: 20px;
       width: 90px;
@@ -60,12 +66,12 @@
       <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
     </div>
     <div class="content">
-      <h2>Congratulations, {{username}}!</h2>
-      <p class="success">Your account has been successfully activated.</p>
+      <h1 class="success" >Congratulations, {{username}} Your account has been successfully activated!</h1>
       <span>You can now <a href="{{loginLink}}">login to your account.</a></span>
     </div>
     <div class="footer">
-      <span>Thank you for joining us at DoJewelry.shop</span>
+      <span>Thank you for joining us!</span>
+       <p class="note">or you can close this window</p>
     </div>
   </div>
 </body>
