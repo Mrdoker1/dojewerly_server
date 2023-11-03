@@ -8,8 +8,6 @@
       background-color: #F4F4F2;
       margin: 0;
       padding: 0;
-      border: 1px solid #bdbdbd;
-      border-radius: 8px;
     }
     body, p, span, h2 {
         color: #161412;
@@ -18,6 +16,9 @@
       max-width: 600px;
       margin: 20px auto;
       background: #FFF;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+      overflow: hidden;
     }
     .header {
       background-color: #F4F4F2;
@@ -65,11 +66,11 @@
     </div>
     <div class="content">
       <h2>Dear {{username}},</h2>
-      <p>Thank you for registering at DoJewelry.shop. We're excited to have you on board!</p>
+      <p>Thank you for registering at <strong>DoJewelry.shop</strong>. We're excited to have you on board!</p>
       <p>To activate your account please click the button below:</p>
       <a href="{{activationLink}}" class="button">Activate Account</a>
       <p>If you did not sign up for this account, you can ignore this email and the account will not be activated.</p>
-      <p>Regards,<br>The DoJewelry Team</p>
+      <p>Regards,<br><strong>The DoJewelry Team</strong></p>
     </div>
     <div class="footer">
       <span>Sent with ♥ from DoJewelry.shop</span><br>

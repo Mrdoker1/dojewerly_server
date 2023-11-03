@@ -51,6 +51,13 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty({
+    example: false,
+    description: 'Whether the user account is activated or not',
+    default: false,
+  })
+  isActivated: boolean;
+
+  @ApiProperty({
     example: 'user',
     description: 'User role',
     enum: ['admin', 'user'],

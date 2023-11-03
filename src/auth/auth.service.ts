@@ -20,16 +20,24 @@ export class AuthService {
   ) {}
 
   async validateUser(
-    email: string,
+    inputEmail: string,
     password: string,
   ): Promise<UserDocument | null> {
+    const email = inputEmail.toLowerCase(); // Преобразуем введенный email к нижнему регистру
     console.log('Trying to validate user with email:', email);
     const user = await this.userService.findByEmail(email);
     if (!user) {
       console.log('User not found with email:', email);
       throw new BadRequestException('User not found');
     }
+    if (!user.isActivated) {
+      console.log('User account not activated:', email);
+      throw new BadRequestException(
+        'Account is not activated. Please check your email!',
+      );
+    }
     if (user.password !== password) {
+      // Предполагается, что пароль уже хэширован
       console.log('Invalid password for email:', email);
       throw new BadRequestException('Invalid password!');
     }

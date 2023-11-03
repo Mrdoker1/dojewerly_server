@@ -9,6 +9,7 @@ export interface User extends Document {
   username: string;
   password: string;
   role: UserRole;
+  isActive: boolean;
   favorites: Types.ObjectId[];
   settings: { email: boolean };
 }
@@ -32,6 +33,9 @@ export class User {
 
   @Prop({ type: { email: Boolean }, default: {} })
   settings: { email: boolean };
+
+  @Prop({ default: false })
+  isActivated: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -24,4 +24,11 @@ export class TemplateService {
   }): string {
     return this.compileTemplate('confirmation', data);
   }
+
+  public getActivationSuccessTemplate(data: {
+    username: string;
+    loginLink: string;
+  }): string {
+    return this.compileTemplate('activation-success', data);
+  }
 }

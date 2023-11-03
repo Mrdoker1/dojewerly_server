@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account Activated - DoJewelry.shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style type="text/css">
+    body {
+      font-family: 'Jost', sans-serif;
+      background-color: #F4F4F2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #FFF;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 40px;
+    }
+    .header, .content, .footer {
+      text-align: center;
+    }
+    h2 {
+      font-family: 'Cormorant', serif;
+    }
+    span {
+      font-size: 13px;
+    }
+    .button {
+      background-color: #000;
+      color: #fff !important;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 20px 0;
+    }
+    .button:hover{
+      background-color: #272727;
+      color: #fff;
+    }
+    .success {
+      color: #00c784;
+    }
+    .logo {
+      margin-bottom: 20px;
+      width: 90px;
+    }
+    a {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
+    </div>
+    <div class="content">
+      <h2>Congratulations, {{username}}!</h2>
+      <p class="success">Your account has been successfully activated.</p>
+      <span>You can now <a href="{{loginLink}}">login to your account.</a></span>
+    </div>
+    <div class="footer">
+      <span>Thank you for joining us at DoJewelry.shop</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument, UserRole } from './user.model';
@@ -18,8 +22,9 @@ export class UserService {
   }
 
   async findByEmail(email: string): Promise<UserDocument | null> {
-    console.log(email);
-    return await this.userModel.findOne({ email }).exec();
+    const lowerCaseEmail = email.toLowerCase(); // Преобразуем email к нижнему регистру
+    console.log(lowerCaseEmail);
+    return await this.userModel.findOne({ email: lowerCaseEmail }).exec();
   }
 
   // UserService
@@ -34,6 +39,7 @@ export class UserService {
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
+    createUserDto.email = createUserDto.email.toLowerCase(); // Преобразуем email к нижнему регистру
     const user = new this.userModel(createUserDto);
     return user.save();
   }
@@ -59,12 +65,26 @@ export class UserService {
   async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<void> {
     const { email } = updateUserDto;
     if (email) {
-      const existingUser = await this.findByEmail(email);
+      const lowerCaseEmail = email.toLowerCase(); // Преобразуем email к нижнему регистру
+      const existingUser = await this.findByEmail(lowerCaseEmail);
       if (existingUser && String(existingUser._id) !== id) {
         throw new BadRequestException('Email is already taken');
       }
     }
     await this.userModel.findByIdAndUpdate(id, updateUserDto).exec();
+  }
+
+  async activateUser(userId: string): Promise<UserDocument> {
+    // Найти пользователя по ID и установить isActivated в true
+    const user = await this.userModel.findByIdAndUpdate(
+      userId,
+      { isActivated: true },
+      { new: true },
+    );
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   async updateProfile(

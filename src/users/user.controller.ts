@@ -10,6 +10,7 @@ import {
   Req,
   Patch,
   BadRequestException,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import {
@@ -17,7 +18,7 @@ import {
   UpdateProfileDto,
   UpdateUserDto,
 } from '../dto/user.dto';
-import { User, UserDocument } from './user.model';
+import { UserDocument } from './user.model';
 import { UserRole } from '../enum/enums';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
@@ -34,7 +35,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 import { ResendService } from 'nestjs-resend';
 import { TemplateService } from '../mail/template.service';
-import { Resend } from 'resend';
+import { Response } from 'express';
 import { MailService } from 'src/mail/mail.service';
 
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
@@ -118,30 +119,33 @@ export class UserController {
       throw new BadRequestException('Email is already taken!');
     }
 
-    const newUser = {
-      email: 'fixrapdok@gmail.com',
-      username: 'EMAIL_TEST',
-      password: '1111',
-      role: 'user',
-      favorites: {},
-      settings: { email: true },
-    } as User;
+    const server = process.env.SERVER_DOMAIN;
+    const client = process.env.CLIENT_DOMAIN;
 
-    // // Создание пользователя
-    // const newUser = await this.userService.createUser(createUserDto);
+    // const newUser = {
+    //   email: 'fixrapdok@gmail.com',
+    //   username: 'EMAIL_TEST',
+    //   password: '1111',
+    //   role: 'user',
+    //   favorites: {},
+    //   settings: { email: true },
+    // } as User;
+
+    // Создание пользователя
+    const newUser = await this.userService.createUser(createUserDto);
 
     // Подготовка и отправка письма
-    const confirmUrl = `https://dojewerlyserver-production.up.railway.app/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
+    const confirmUrl = `https://${server}/users/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
     const htmlContent = this.templateService.getConfirmationTemplate({
       username: newUser.username,
       activationLink: confirmUrl,
-      unsubscribeLink: 'https://dojewerly.shop/dashboard/profile',
+      unsubscribeLink: `https://${client}/dashboard/profile`,
     });
 
     await this.resendService.send({
       from: 'support@dojewerly.shop',
       to: newUser.email,
-      subject: 'Please confirm your DoJewerly email',
+      subject: 'Please confirm your DoJewerly email!',
       html: htmlContent,
     });
 
@@ -229,5 +233,32 @@ export class UserController {
     }
     // Обновление информации о пользователе
     await this.userService.updateUser(id, updateUserDto);
+  }
+
+  // Эндпойнт для активации аккаунта
+  @Get('confirm/:userId')
+  async confirmAccount(
+    @Param('userId') userId: string,
+    @Res() res: Response,
+  ): Promise<any> {
+    const user = await this.userService.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    if (user.isActivated) {
+      return res.status(400).send('Account is already activated');
+    }
+    await this.userService.activateUser(userId);
+
+    // Если аккаунт активирован, используйте новый шаблон
+    const htmlContent = this.templateService.getActivationSuccessTemplate({
+      username: user.username,
+      loginLink: `https://${process.env.CLIENT_DOMAIN}/signin`,
+    });
+
+    res.send(htmlContent);
+
+    // Или вы можете выполнить редирект:
+    // res.redirect(`https://${process.env.CLIENT_DOMAIN}/login`);
   }
 }
