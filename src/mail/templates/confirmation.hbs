@@ -6,9 +6,13 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #F4F4F2;
-      color: #161412;
       margin: 0;
       padding: 0;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+    }
+    body, p, span, h2 {
+        color: #161412;
     }
     .container {
       max-width: 600px;
@@ -32,7 +36,7 @@
     }
     .button {
       background-color: #000;
-      color: #fff;
+      color: #fff !important;
       padding: 10px 20px;
       text-decoration: none;
       border-radius: 4px;
@@ -41,14 +45,16 @@
     }
     .button:hover{
         background-color: #272727;
+        color: #fff;
     }
     img.logo {
       display: block;
       margin: auto;
+      width: 90px;
     }
     a, a:visited, a:hover, a:active {
       text-decoration: none;
-      color: #fff;
+      color: inherit;
     }
   </style>
 </head>
@@ -66,8 +72,8 @@
       <p>Regards,<br>The DoJewelry Team</p>
     </div>
     <div class="footer">
-      Sent with ♥ from DoJewelry.shop<br>
-      Getting too many emails? <a href="{{unsubscribeLink}}">Unsubscribe</a>
+      <span>Sent with ♥ from DoJewelry.shop</span><br>
+      <span>Getting too many emails?</span> <a href="{{unsubscribeLink}}">Unsubscribe</a>
     </div>
   </div>
 </body>

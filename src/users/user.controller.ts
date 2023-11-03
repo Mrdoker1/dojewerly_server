@@ -135,6 +135,7 @@ export class UserController {
     const htmlContent = this.templateService.getConfirmationTemplate({
       username: newUser.username,
       activationLink: confirmUrl,
+      unsubscribeLink: 'https://dojewerly.shop/dashboard/profile',
     });
 
     await this.resendService.send({
