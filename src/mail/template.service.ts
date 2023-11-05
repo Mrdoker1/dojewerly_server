@@ -31,4 +31,18 @@ export class TemplateService {
   }): string {
     return this.compileTemplate('activation-success', data);
   }
+
+  public getNewProductsEmailTemplate(data: {
+    username: string;
+    text: string;
+    products: Array<{
+      name: string;
+      price: number;
+      imageURL: string;
+      link: string;
+    }>;
+    unsubscribeLink: string;
+  }): string {
+    return this.compileTemplate('new-products', data);
+  }
 }

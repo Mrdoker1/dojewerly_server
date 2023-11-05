@@ -9,7 +9,7 @@ export interface User extends Document {
   username: string;
   password: string;
   role: UserRole;
-  isActive: boolean;
+  isActive: boolean; // Добавляем новое свойство
   favorites: Types.ObjectId[];
   settings: { email: boolean };
 }

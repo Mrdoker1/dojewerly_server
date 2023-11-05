@@ -1,41 +1,21 @@
-import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { Global, Module } from '@nestjs/common';
-import { MailService } from './mail.service';
-import { join } from 'path';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Module } from '@nestjs/common';
+import { EmailService } from './mail.service';
+import { EmailController } from './mail.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from '../users/user.model'; // Путь к модели User должен быть обновлён
+import { ProductModule } from '../products/product.module'; // Убедитесь, что путь к ProductModule верный
+import { TemplateService } from 'src/mail/template.service';
+import { ResendModule } from 'nestjs-resend';
 
-@Global() // 👈 global module
 @Module({
   imports: [
-    MailerModule.forRootAsync({
-      // imports: [ConfigModule], // import module if not enabled globally
-      useFactory: async (config: ConfigService) => ({
-        // transport: config.get("MAIL_TRANSPORT"),
-        // or
-        transport: {
-          host: config.get('MAIL_HOST'),
-          secure: false,
-          auth: {
-            user: config.get('MAIL_USER'),
-            pass: config.get('MAIL_PASSWORD'),
-          },
-        },
-        defaults: {
-          from: `"No Reply" <${config.get('MAIL_FROM')}>`,
-        },
-        template: {
-          dir: join(__dirname, 'templates'),
-          adapter: new HandlebarsAdapter(),
-          options: {
-            strict: true,
-          },
-        },
-      }),
-      inject: [ConfigService],
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    ProductModule, // Импортируйте ProductModule здесь
+    ResendModule.forRoot({
+      apiKey: process.env.RESEND_API_KEY, // Использование переменной окружения
     }),
   ],
-  providers: [MailService],
-  exports: [MailService],
+  controllers: [EmailController],
+  providers: [EmailService, TemplateService],
 })
-export class MailModule {}
+export class EmailModule {}

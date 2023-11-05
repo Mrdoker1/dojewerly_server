@@ -36,16 +36,14 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ResendService } from 'nestjs-resend';
 import { TemplateService } from '../mail/template.service';
 import { Response } from 'express';
-import { MailService } from 'src/mail/mail.service';
 
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
 @Controller('users')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private readonly resendService: ResendService, // Добавьте это
-    private readonly templateService: TemplateService, // и это
-    private readonly mailService: MailService, // и это
+    private readonly resendService: ResendService,
+    private readonly templateService: TemplateService,
   ) {}
 
   @Get()

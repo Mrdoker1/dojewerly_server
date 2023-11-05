@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
-export type ProductDocument = Product & Document;
+import { Document } from 'mongoose';
 
 export interface LocalizedProductProps {
   name?: string;
@@ -20,6 +19,7 @@ export interface ProductProps {
   type: string;
 }
 
+// Обратите внимание, что мы используем 'Document' из 'mongoose' здесь
 export interface Product extends Document {
   name: string;
   price: number;
@@ -50,4 +50,7 @@ export class Product {
   localization: { [key: string]: Partial<LocalizedProductProps> };
 }
 
+// Это создает тип ProductDocument с _id, который уже включен в Document
 export const ProductSchema = SchemaFactory.createForClass(Product);
+// И экспорт типа ProductDocument после этого
+export type ProductDocument = Product & Document;

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Products at DoJewelry.shop</title>
+  <!-- Определение стилей или подключение внешнего CSS файла -->
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #F4F4F2;
+      margin: 0;
+      padding: 0;
+    }
+    body, p, span, h2 {
+        color: #161412;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #FFF;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .header {
+      background-color: #F4F4F2;
+      padding: 32px 10px;
+      text-align: center;
+    }
+    .content {
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .footer {
+      background-color: #F4F4F2;
+      padding: 32px 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .button {
+      background-color: #000;
+      color: #fff !important;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 20px 0;
+    }
+    .button:hover{
+        background-color: #272727;
+        color: #fff;
+    }
+    img.logo {
+      display: block;
+      margin: auto;
+      width: 90px;
+    }
+    a, a:visited, a:hover, a:active {
+      text-decoration: none;
+      color: inherit;
+    }
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .product-item {
+      width: 150px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .product-info{
+      margin: 4px;
+    }
+    .product-item img {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
+    </div>
+    <div class="content">
+      <h2>Dear {{username}},</h2>
+      <p>{{text}}</p>
+      <div class="product-container">
+        {{#each products}}
+          <div class="product-item">
+            <img src="{{this.imageURL}}" alt="{{this.name}}" />
+            <div class="product-info">
+              <h3>{{this.name}}</h3>
+              <p>BYN {{this.price}}</p>
+              <a href="{{this.link}}" class="button">View Product</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="footer">
+      <span>Sent with ♥ from DoJewelry.shop</span><br>
+      <span>Getting too many emails?</span> <a href="{{unsubscribeLink}}">Unsubscribe</a>
+    </div>
+  </div>
+</body>
+</html>
