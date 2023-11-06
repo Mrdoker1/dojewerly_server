@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>New Products at DoJewelry.shop</title>
-  <!-- Определение стилей или подключение внешнего CSS файла -->
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <style type="text/css">
     body {
       font-family: Arial, sans-serif;
@@ -11,15 +11,22 @@
       padding: 0;
     }
     body, p, span, h2 {
-        color: #161412;
+      color: #161412;
+      font-family: 'Jost', sans-serif; /* Изменено на Jost */
+    }
+    p {
+      font-size: 14px;
+    }
+    .heading{
+      margin: 20px 0;
     }
     .container {
       max-width: 600px;
       margin: 20px auto;
       background: #FFF;
-      border: 1px solid #bdbdbd;
       border-radius: 8px;
       overflow: hidden;
+      border: 1px solid #bdbdbd;
     }
     .header {
       background-color: #F4F4F2;
@@ -27,7 +34,6 @@
       text-align: center;
     }
     .content {
-      padding: 40px 32px;
       text-align: center;
     }
     .footer {
@@ -46,8 +52,8 @@
       margin: 20px 0;
     }
     .button:hover{
-        background-color: #272727;
-        color: #fff;
+      background-color: #272727;
+      color: #fff;
     }
     img.logo {
       display: block;
@@ -61,23 +67,37 @@
     .product-container {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
-      margin-top: 20px;
+      justify-content: space-between; /* Если вы хотите, чтобы они были равномерно распределены по ширине */
+      margin: 10px;
     }
     .product-item {
-      width: 150px;
-      margin-bottom: 20px;
       text-align: center;
+      padding-bottom: 20px;
     }
-    .product-info{
-      margin: 4px;
+    .product-row {
+      width: 100%; /* Вычитаем 12px, чтобы учесть отступы */
+      justify-content: space-around;
+      margin: 10px; /* Отступ между рядами */
+    }
+    .product-row .product-item {
     }
     .product-item img {
       width: 100%;
-      border: 1px solid #ddd;
       border-radius: 4px;
-      padding: 5px;
-      margin-bottom: 10px;
+      pointer-events: none;
+    }
+    .product-info {
+      margin-top: 6px;
+    }
+    .product-info h3,
+    .product-info p {
+      margin: 0;
+      padding: 3px 0;
+      color: #000;
+    }
+    .button {
+      display: block;
+      margin-top: 6px;
     }
   </style>
 </head>
@@ -87,24 +107,32 @@
       <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
     </div>
     <div class="content">
-      <h2>Dear {{username}},</h2>
-      <p>{{text}}</p>
-      <div class="product-container">
-        {{#each products}}
-          <div class="product-item">
-            <img src="{{this.imageURL}}" alt="{{this.name}}" />
-            <div class="product-info">
-              <h3>{{this.name}}</h3>
-              <p>BYN {{this.price}}</p>
-              <a href="{{this.link}}" class="button">View Product</a>
-            </div>
-          </div>
-        {{/each}}
+      <div class="heading">
+        <h2>Привет {{username}},</h2>
+        <p>{{text}}</p>
       </div>
+      <!-- Обертка для контейнера продуктов начинается здесь -->
+    <div class="product-container">
+      {{#each products}}
+        {{#newRow @index}}
+        <div class="product-item">
+          <a href="{{this.link}}" target="_blank">
+            <img src="{{this.imageURL}}" alt="{{this.name}}" />
+          </a>
+          <div class="product-info">
+            <h3>{{this.name}}</h3>
+            <p>BYN {{this.price}}</p>
+            <a href="{{this.link}}" class="button">View Product</a>
+          </div>
+        </div>
+        {{/newRow}}
+      {{/each}}
+    </div>
+      <!-- Обертка для контейнера продуктов заканчивается здесь -->
     </div>
     <div class="footer">
-      <span>Sent with ♥ from DoJewelry.shop</span><br>
-      <span>Getting too many emails?</span> <a href="{{unsubscribeLink}}">Unsubscribe</a>
+      <p>Sent with ♥ from DoJewelry.shop</p>
+      <p>Getting too many emails? <a href="{{unsubscribeLink}}">Unsubscribe</a></p>
     </div>
   </div>
 </body>

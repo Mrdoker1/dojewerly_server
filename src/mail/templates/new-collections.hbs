@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Collections at DoJewelry.shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <style type="text/css">
+    /* Base styles */
+    body, h2, p, a {
+      font-family: 'Jost', sans-serif;
+      color: #161412;
+    }
+    body {
+      background-color: #F4F4F2;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    p {
+      font-size: 14px;
+    }
+
+    /* Email container */
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #FFF;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #bdbdbd;
+    }
+
+    .heading{
+      margin: 20px 0;
+    }
+
+    /* Header */
+    .header {
+      background-color: #F4F4F2;
+      padding: 32px 10px;
+      text-align: center;
+    }
+    .header img.logo {
+      width: 90px;
+    }
+
+    /* Email content */
+    .content {
+      padding: 20px;
+    }
+    .content h2 {
+      margin-top: 0;
+    }
+
+    /* Collections */
+    .collection {
+      margin-bottom: 20px;
+      padding: 10px;
+      color: #000;
+      border-radius: 6px;
+      background-color: #F4F4F2;
+    }
+
+    .collection:hover{
+      background-color:#ebebe7;
+    }
+
+    .collection + .collection {
+      margin-top: 10px;
+    }
+    .collection-heading {
+      font-size: 24px;
+      margin: 0 0 10px 0;
+    }
+    .collection-description {
+      margin: 0 0 15px 0;
+    }
+    .products-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .product-image {
+      width: 50px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+
+    .collection-link{
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #F4F4F2;
+      padding: 32px 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+    .footer a.button {
+      background-color: #000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .footer a.button:hover {
+      background-color: #272727;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
+    </div>
+    <div class="content">
+      <div class="heading">
+        <h2>Привет {{username}},</h2>
+        <p>{{text}}</p>
+      </div>
+      {{#each collections}}
+        <a href="{{this.link}}" class="collection-link">
+          <div class="collection">
+            <div class="collection-heading">{{this.name}}</div>
+            <div class="collection-description">{{this.description}}</div>
+            <div class="products-row">
+              {{#each this.products}}
+                <img src="{{this.imageURL}}" alt="Product Image" class="product-image">
+              {{/each}}
+            </div>
+          </div>
+        </a>
+      {{/each}}
+    </div>
+    <div class="footer">
+      <p>Sent with ♥ from DoJewelry.shop</p>
+      <p>Getting too many emails? <a href="{{unsubscribeLink}}">Unsubscribe</a></p>
+    </div>
+  </div>
+</body>
+</html>

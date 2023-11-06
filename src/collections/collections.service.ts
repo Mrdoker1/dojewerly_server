@@ -20,6 +20,14 @@ export class CollectionsService {
     private productService: ProductsService,
   ) {}
 
+  async findByIds(collectionIds: string[]): Promise<CollectionDocument[]> {
+    const collections = await this.collectionModel
+      .find({ _id: { $in: collectionIds } })
+      .exec();
+    console.log('Collections found for IDs:', collections);
+    return collections;
+  }
+
   async findById(id: string): Promise<CollectionDocument> {
     return this.collectionModel.findById(id).exec();
   }

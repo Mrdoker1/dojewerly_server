@@ -141,7 +141,7 @@ export class UserController {
     });
 
     await this.resendService.send({
-      from: 'support@dojewerly.shop',
+      from: '"DoJewelry" <support@dojewerly.shop>',
       to: newUser.email,
       subject: 'Please confirm your DoJewerly email!',
       html: htmlContent,

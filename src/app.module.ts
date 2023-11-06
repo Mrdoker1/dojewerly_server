@@ -15,7 +15,7 @@ import { join } from 'path';
 import { EmailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { ResendModule } from 'nestjs-resend';
-import { TemplateService } from 'src/mail/template.service';
+import { TemplateService } from './mail/template.service';
 
 @Module({
   imports: [
