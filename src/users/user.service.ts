@@ -122,16 +122,44 @@ export class UserService {
     return user; // return the updated document
   }
 
+  // async patchProfile(
+  //   id: string,
+  //   updateProfileDto: Partial<UpdateProfileDto>,
+  // ): Promise<UserDocument> {
+  //   const { username, email } = updateProfileDto;
+
+  //   // if (username) {
+  //   //   const existingUser = await this.findByUsername(username);
+  //   //   if (existingUser && String(existingUser._id) !== id) {
+  //   //     throw new Ba dRequestException('Username is already taken');
+  //   //   }
+  //   // }
+
+  //   if (email) {
+  //     const existingUser = await this.findByEmail(email);
+  //     if (existingUser && String(existingUser._id) !== id) {
+  //       throw new BadRequestException('Email is already taken');
+  //     }
+  //   }
+  //   const updates = Object.keys(updateProfileDto)
+  //     .filter((key) => updateProfileDto[key] !== undefined)
+  //     .reduce((obj, key) => {
+  //       obj[key] = updateProfileDto[key];
+  //       return obj;
+  //     }, {});
+  //   return this.userModel.findByIdAndUpdate(id, updates, { new: true }).exec();
+  // }
+
   async patchProfile(
     id: string,
     updateProfileDto: Partial<UpdateProfileDto>,
   ): Promise<UserDocument> {
-    const { username, email } = updateProfileDto;
+    const { username, email, settings } = updateProfileDto;
 
     // if (username) {
     //   const existingUser = await this.findByUsername(username);
     //   if (existingUser && String(existingUser._id) !== id) {
-    //     throw new Ba dRequestException('Username is already taken');
+    //     throw new BadRequestException('Username is already taken');
     //   }
     // }
 
@@ -141,12 +169,29 @@ export class UserService {
         throw new BadRequestException('Email is already taken');
       }
     }
+
+    // Создаем объект обновлений для не вложенных полей
     const updates = Object.keys(updateProfileDto)
-      .filter((key) => updateProfileDto[key] !== undefined)
+      .filter(
+        (key) =>
+          !['settings'].includes(key) && updateProfileDto[key] !== undefined,
+      )
       .reduce((obj, key) => {
         obj[key] = updateProfileDto[key];
         return obj;
       }, {});
+
+    // Обновляем вложенные поля settings с использованием точечной нотации
+    if (settings) {
+      if (settings.email !== undefined) {
+        updates['settings.email'] = settings.email;
+      }
+      if (settings.language) {
+        updates['settings.language'] = settings.language;
+      }
+    }
+
+    // Выполняем обновление в базе данных
     return this.userModel.findByIdAndUpdate(id, updates, { new: true }).exec();
   }
 
