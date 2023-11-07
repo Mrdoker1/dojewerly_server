@@ -9,9 +9,9 @@ export interface User extends Document {
   username: string;
   password: string;
   role: UserRole;
-  isActive: boolean; // Добавляем новое свойство
+  isActive: boolean;
   favorites: Types.ObjectId[];
-  settings: { email: boolean };
+  settings: { email: boolean; language: string };
 }
 
 @Schema()
@@ -31,8 +31,11 @@ export class User {
   @Prop({ type: [Types.ObjectId], default: [] })
   favorites: Types.ObjectId[];
 
-  @Prop({ type: { email: Boolean }, default: {} })
-  settings: { email: boolean };
+  @Prop({
+    type: { email: Boolean, language: String },
+    default: { email: true, language: 'EN' },
+  })
+  settings: { email: boolean; language: string };
 
   @Prop({ default: false })
   isActivated: boolean;

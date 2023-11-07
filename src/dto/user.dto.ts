@@ -16,6 +16,12 @@ export class UpdateUserDto {
     enum: ['admin', 'user'],
   })
   role: string;
+  @ApiPropertyOptional({
+    example: { email: true, language: 'EN' },
+    description: 'User settings',
+    type: Object,
+  })
+  settings?: { email?: boolean; language?: string };
 }
 
 export class UpdateProfileDto {
@@ -32,12 +38,12 @@ export class UpdateProfileDto {
   password: string;
 
   @ApiPropertyOptional({
-    example: { email: true },
+    example: { email: true, language: 'EN' },
     description: 'Settings object',
     type: 'object',
     additionalProperties: true,
   })
-  settings: { email: boolean };
+  settings: { email: boolean; language: string };
 }
 
 export class CreateUserDto {
@@ -63,4 +69,10 @@ export class CreateUserDto {
     enum: ['admin', 'user'],
   })
   role: string;
+  @ApiProperty({
+    example: { email: true, language: 'EN' },
+    description: 'User settings',
+    type: Object,
+  })
+  settings: { email: boolean; language: string };
 }

@@ -108,6 +108,7 @@ export class UserController {
   ): Promise<UserDocument> {
     // Set the role to "user"
     createUserDto.role = UserRole.USER;
+    createUserDto.role = UserRole.USER;
 
     // Check if the Email is already taken
     const existingUser = await this.userService.findByEmail(
@@ -119,15 +120,6 @@ export class UserController {
 
     const server = process.env.SERVER_DOMAIN;
     const client = process.env.CLIENT_DOMAIN;
-
-    // const newUser = {
-    //   email: 'fixrapdok@gmail.com',
-    //   username: 'EMAIL_TEST',
-    //   password: '1111',
-    //   role: 'user',
-    //   favorites: {},
-    //   settings: { email: true },
-    // } as User;
 
     // Создание пользователя
     const newUser = await this.userService.createUser(createUserDto);

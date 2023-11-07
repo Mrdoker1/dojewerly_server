@@ -11,7 +11,16 @@ import {
   ApiResponse,
   ApiProperty,
   ApiBearerAuth,
+  ApiPropertyOptional,
 } from '@nestjs/swagger';
+
+export class LocalizedProps {
+  @ApiPropertyOptional({ description: 'Localized text' })
+  text?: string;
+
+  @ApiPropertyOptional({ description: 'Localized subject' })
+  subject?: string;
+}
 
 class EmailProductInfoDto {
   @ApiProperty({
@@ -37,6 +46,24 @@ class EmailProductInfoDto {
     type: [String],
   })
   productIds: string[];
+  @ApiProperty({
+    example: {
+      RU: {
+        text: 'Вот несколько интересных новинок!',
+        subject: 'Проверьте наши новинки!',
+      },
+    },
+    description: 'Localized content for the email.',
+    type: 'object',
+    additionalProperties: {
+      type: 'object',
+      properties: {
+        text: { type: 'string' },
+        subject: { type: 'string' },
+      },
+    },
+  })
+  localization: { [key: string]: LocalizedProps };
 }
 
 class EmailCollectionInfoDto {
@@ -62,6 +89,24 @@ class EmailCollectionInfoDto {
     type: [String],
   })
   collectionIds: string[];
+  @ApiProperty({
+    example: {
+      RU: {
+        text: 'У меня вышла новая крутая коллекция, посмотри что тут есть!',
+        subject: 'Новая весенняя коллекция!',
+      },
+    },
+    description: 'Localized content for the email.',
+    type: 'object',
+    additionalProperties: {
+      type: 'object',
+      properties: {
+        text: { type: 'string' },
+        subject: { type: 'string' },
+      },
+    },
+  })
+  localization: { [key: string]: LocalizedProps };
 }
 
 @ApiTags('Email')
@@ -84,6 +129,7 @@ export class EmailController {
       body.text,
       body.subject,
       body.productIds,
+      body.localization,
     );
   }
 
@@ -102,6 +148,7 @@ export class EmailController {
       body.text,
       body.subject,
       body.collectionIds,
+      body.localization,
     );
   }
 }
