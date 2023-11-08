@@ -3,141 +3,37 @@
 <head>
   <title>New Products at DoJewelry.shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <style type="text/css">
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #F4F4F2;
-      margin: 0;
-      padding: 0;
-    }
-    body, p, span, h2 {
-      color: #161412;
-      font-family: 'Jost', sans-serif; /* Изменено на Jost */
-    }
-    p {
-      font-size: 14px;
-    }
-    .heading{
-      margin: 20px;
-    }
-    .headingText{
-      margin-top: 24px;
-      margin-bottom: 0;
-    }
-    .text{
-      margin-top: 8px;
-    }
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      background: #FFF;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid #bdbdbd;
-    }
-    .header {
-      background-color: #F4F4F2;
-      padding: 32px 10px;
-    }
-    .content {
-    }
-    .footer {
-      background-color: #F4F4F2;
-      padding: 32px 10px;
-      text-align: center;
-      font-size: 13px;
-    }
-    .button {
-      background-color: #000;
-      color: #fff !important;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 4px;
-      display: inline-block;
-      margin: 20px 0;
-    }
-    .button:hover{
-      background-color: #272727;
-      color: #fff;
-    }
-    img.logo {
-      display: block;
-      margin: auto;
-      width: 90px;
-    }
-    a, a:visited, a:hover, a:active {
-      text-decoration: none;
-      color: inherit;
-    }
-    .product-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between; /* Если вы хотите, чтобы они были равномерно распределены по ширине */
-      margin: 10px;
-    }
-    .product-item {
-      text-align: center;
-      padding-bottom: 20px;
-    }
-    .product-row {
-      width: 100%; /* Вычитаем 12px, чтобы учесть отступы */
-      justify-content: space-around;
-      margin: 10px; /* Отступ между рядами */
-    }
-    .product-row .product-item {
-    }
-    .product-item img {
-      width: 100%;
-      border-radius: 4px;
-      pointer-events: none;
-    }
-    .product-info {
-      margin-top: 6px;
-    }
-    .product-info h3,
-    .product-info p {
-      margin: 0;
-      padding: 3px 0;
-      color: #000;
-    }
-    .button {
-      display: block;
-      margin-top: 6px;
-    }
-  </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" class="logo"/>
+<body style="font-family: 'Jost', Arial, sans-serif; background-color: #F4F4F2; margin: 0; padding: 20px;">
+  <div style="max-width: 600px; margin: 20px auto; background: #FFF; border-radius: 8px; overflow: hidden; border: 1px solid #bdbdbd;">
+    <div style="background-color: #F4F4F2; padding: 32px 10px;">
+      <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" style="display: block; margin: auto; width: 90px;"/>
     </div>
-    <div class="content">
-      <div class="heading">
-        <h2 class="headingText">Привет {{username}},</h2>
-        <p class="text">{{text}}</p>
+    <div>
+      <div style="margin: 20px;">
+        <h2 style="margin-top: 24px; margin-bottom: 0; color: #161412; font-family: 'Jost', sans-serif;">Привет {{username}},</h2>
+        <p style="font-size: 14px; color: #161412; font-family: 'Jost', sans-serif; margin-top: 8px;">{{text}}</p>
       </div>
-      <!-- Обертка для контейнера продуктов начинается здесь -->
-    <div class="product-container">
-      {{#each products}}
-        {{#newRow @index}}
-        <div class="product-item">
-          <a href="{{this.link}}" target="_blank">
-            <img src="{{this.imageURL}}" alt="{{this.name}}" />
-          </a>
-          <div class="product-info">
-            <h3>{{this.name}}</h3>
-            <p>BYN {{this.price}}</p>
-            <a href="{{this.link}}" class="button">View Product</a>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin: 10px;">
+        {{#each products}}
+          {{#newRow @index}}
+          <div style="text-align: center; padding-bottom: 20px; flex: 0 50%; margin: 8px;">
+            <a href="{{this.link}}" target="_blank" style="text-decoration: none; color: inherit;">
+              <img src="{{this.imageURL}}" alt="{{this.name}}" style="width: 100%; border-radius: 4px; pointer-events: none;"/>
+            </a>
+            <div style="margin-top: 6px;">
+              <h3 style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">{{this.name}}</h3>
+              <p style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">BYN {{this.price}}</p>
+              <a href="{{this.link}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 6px;">View Product</a>
+            </div>
           </div>
-        </div>
-        {{/newRow}}
-      {{/each}}
+          {{/newRow}}
+        {{/each}}
+      </div>
     </div>
-      <!-- Обертка для контейнера продуктов заканчивается здесь -->
-    </div>
-    <div class="footer">
-      <p>Sent with ♥ from DoJewelry.shop</p>
-      <p>Getting too many emails? <a href="{{unsubscribeLink}}">Unsubscribe</a></p>
+    <div style="background-color: #F4F4F2; padding: 32px 10px; text-align: center; font-size: 13px;">
+      <p style="font-family: 'Jost', sans-serif;">Sent with ♥ from DoJewelry.shop</p>
+      <p style="font-family: 'Jost', sans-serif;">Getting too many emails? <a href="{{unsubscribeLink}}" style="text-decoration: none; color: inherit;">Unsubscribe</a></p>
     </div>
   </div>
 </body>
