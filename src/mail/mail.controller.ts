@@ -120,12 +120,8 @@ export class EmailController {
   @Roles(UserRole.ADMIN)
   @ApiOperation({ summary: 'Send email with product info to users' })
   @ApiBody({ type: EmailProductInfoDto })
-  @ApiResponse({ status: 200, description: 'Emails sent successfully.' })
-  @ApiResponse({ status: 400, description: 'Bad request.' })
-  @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @ApiResponse({ status: 403, description: 'Forbidden for non-admin users.' })
   async sendEmails(@Body() body: EmailProductInfoDto) {
-    await this.emailService.sendEmailToUsersWithProductInfo(
+    return await this.emailService.sendEmailToUsersWithProductInfo(
       body.text,
       body.subject,
       body.productIds,
@@ -144,7 +140,7 @@ export class EmailController {
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
   @ApiResponse({ status: 403, description: 'Forbidden for non-admin users.' })
   async sendCollectionEmails(@Body() body: EmailCollectionInfoDto) {
-    await this.emailService.sendEmailToUsersWithCollectionInfo(
+    return await this.emailService.sendEmailToUsersWithCollectionInfo(
       body.text,
       body.subject,
       body.collectionIds,

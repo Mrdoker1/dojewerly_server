@@ -18,7 +18,14 @@
       font-size: 14px;
     }
     .heading{
-      margin: 20px 0;
+      margin: 20px;
+    }
+    .headingText{
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+    .text{
+      margin-top: 8px;
     }
     .container {
       max-width: 600px;
@@ -31,10 +38,8 @@
     .header {
       background-color: #F4F4F2;
       padding: 32px 10px;
-      text-align: center;
     }
     .content {
-      text-align: center;
     }
     .footer {
       background-color: #F4F4F2;
@@ -108,8 +113,8 @@
     </div>
     <div class="content">
       <div class="heading">
-        <h2>Привет {{username}},</h2>
-        <p>{{text}}</p>
+        <h2 class="headingText">Привет {{username}},</h2>
+        <p class="text">{{text}}</p>
       </div>
       <!-- Обертка для контейнера продуктов начинается здесь -->
     <div class="product-container">

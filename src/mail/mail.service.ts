@@ -25,7 +25,7 @@ export class EmailService {
     emailSubject: string,
     productIds: string[],
     localization: { [key: string]: LocalizedProps },
-  ): Promise<void> {
+  ): Promise<User[]> {
     // const client = process.env.CLIENT_DOMAIN;
     const client = 'dojewerly.shop';
     // const server = process.env.SERVER_DOMAIN;
@@ -81,6 +81,7 @@ export class EmailService {
         html: emailHtmlContent,
       });
     }
+    return users;
   }
 
   async sendEmailToUsersWithCollectionInfo(
@@ -88,7 +89,7 @@ export class EmailService {
     emailSubject: string,
     collectionIds: string[],
     localization: { [key: string]: LocalizedProps },
-  ): Promise<void> {
+  ): Promise<User[]> {
     const client = 'dojewerly.shop';
     const server = 'dojewerlyserver-production.up.railway.app';
 
@@ -148,6 +149,7 @@ export class EmailService {
         html: emailHtmlContent,
       });
     }
+    return users;
   }
 
   private async getProductDetails(
