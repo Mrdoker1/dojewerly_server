@@ -4,32 +4,34 @@
   <title>New Products at DoJewelry.shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
-<body style="font-family: 'Jost', Arial, sans-serif; background-color: #F4F4F2; margin: 0; padding: 20px;">
+<body style="font-family: 'Jost', Arial, sans-serif; background-color: #F4F4F2; margin: 0; padding: 20px 10px;">
   <div style="max-width: 600px; margin: 20px auto; background: #FFF; border-radius: 8px; overflow: hidden; border: 1px solid #bdbdbd;">
     <div style="background-color: #F4F4F2; padding: 32px 10px;">
       <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" style="display: block; margin: auto; width: 90px;"/>
     </div>
-    <div>
-      <div style="margin: 20px;">
+    <div style="padding: 10px;">
+      <div style="margin: 10px;">
         <h2 style="margin-top: 24px; margin-bottom: 0; color: #161412; font-family: 'Jost', sans-serif;">Привет {{username}},</h2>
         <p style="font-size: 14px; color: #161412; font-family: 'Jost', sans-serif; margin-top: 8px;">{{text}}</p>
       </div>
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin: 10px;">
+      <table style="width: 100%; max-width: 600px; margin: 20px auto; border-collapse: collapse;">
         {{#each products}}
           {{#newRow @index}}
-          <div style="text-align: center; padding-bottom: 20px; flex: 0 50%; margin: 8px;">
-            <a href="{{this.link}}" target="_blank" style="text-decoration: none; color: inherit;">
-              <img src="{{this.imageURL}}" alt="{{this.name}}" style="width: 100%; border-radius: 4px; pointer-events: none;"/>
-            </a>
-            <div style="margin-top: 6px;">
-              <h3 style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">{{this.name}}</h3>
-              <p style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">BYN {{this.price}}</p>
-              <a href="{{this.link}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 6px;">View Product</a>
-            </div>
-          </div>
+            <td valign="top" style="width: 50%; box-sizing: border-box;">
+              <div style="text-align: center; padding-bottom: 20px; margin: 8px;">
+                <a href="{{this.link}}" target="_blank" style="text-decoration: none; color: inherit;">
+                  <img src="{{this.imageURL}}" style="width: 100%; border-radius: 4px; pointer-events: none;"/>
+                </a>
+                <div style="margin-top: 6px;">
+                  <h3 style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif; overflow: hidden; text-overflow: ellipsis; max-width: 90%; display: inline-block; vertical-align: middle;">{{this.name}}</h3>
+                  <p style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">BYN {{this.price}}</p>
+                  <a href="{{this.link}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 6px;">View Product</a>
+                </div>
+              </div>
+            </td>
           {{/newRow}}
         {{/each}}
-      </div>
+      </table>
     </div>
     <div style="background-color: #F4F4F2; padding: 32px 10px; text-align: center; font-size: 13px;">
       <p style="font-family: 'Jost', sans-serif;">Sent with ♥ from DoJewelry.shop</p>

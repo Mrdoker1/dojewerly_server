@@ -28,21 +28,32 @@ export class TemplateService {
       return array.length;
     });
 
-    handlebars.registerHelper('newRow', function (index, options) {
+    handlebars.registerHelper('isStartOfNewRow', function (index) {
+      return index % 2 === 0;
+    });
+
+    handlebars.registerHelper('isEndOfNewRow', function (index, options) {
       const total = options.data.root.products.length;
+      return index % 2 === 1 || index === total - 1;
+    });
+
+    handlebars.registerHelper('newRow', function (index, options) {
+      const products = options.data.root.products;
       let result = '';
       if (index % 2 === 0) {
-        // If it's the start of a new row
-        result += '<div class="product-row">'; // Open a new row
+        if (index > 0) {
+          // Закрываем предыдущую строку, если это не первый продукт
+          result += '</tr>';
+        }
+        // Начинаем новую строку для каждого четного индекса продукта
+        result += '<tr>';
       }
-
-      result += options.fn(this); // Generate the product HTML
-
-      if (index % 2 === 1 || index === total - 1) {
-        // If it's the end of a row or the last product
-        result += '</div>'; // Close the row
+      result += options.fn(products[index]);
+      if (index === products.length - 1) {
+        // Закрываем последнюю строку, если это последний продукт
+        result += '</tr>';
       }
-      return new handlebars.SafeString(result);
+      return result;
     });
 
     handlebars.registerHelper('isEven', function (value, options) {
