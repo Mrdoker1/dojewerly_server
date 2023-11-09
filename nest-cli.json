@@ -5,7 +5,8 @@
   "watch": true,
   "compilerOptions": {
     "deleteOutDir": true,
-    "assets": ["mail/templates/**/*"],
+    "assets": ["mail/templates/**/*",
+    { "include": "localization/**/*", "watchAssets": true }],
     "watchAssets": true
   }
 }

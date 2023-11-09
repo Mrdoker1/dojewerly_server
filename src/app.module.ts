@@ -16,12 +16,27 @@ import { EmailModule } from './mail/mail.module';
 import { ConfigModule } from '@nestjs/config';
 import { ResendModule } from 'nestjs-resend';
 import { TemplateService } from './mail/template.service';
+import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
+import * as path from 'path';
+
+console.log('PATH', join(__dirname, 'localization'));
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'), // для обслуживания файлов из папки uploads
       serveRoot: '/uploads', // URL-путь для доступа к файлам
+    }),
+    I18nModule.forRoot({
+      fallbackLanguage: 'en',
+      loaderOptions: {
+        path: path.join(__dirname, '/localization/'),
+        watch: true,
+      },
+      resolvers: [
+        { use: QueryResolver, options: ['lang'] },
+        AcceptLanguageResolver,
+      ],
     }),
     DatabaseModule,
     AuthModule,

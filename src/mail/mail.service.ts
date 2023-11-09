@@ -9,6 +9,7 @@ import { TemplateService } from './template.service';
 import { CollectionsService } from '../collections/collections.service';
 import { CollectionDocument } from '../collections/collections.model';
 import { LocalizedProps } from 'src/mail/mail.controller';
+import { I18nService } from 'nestjs-i18n';
 
 @Injectable()
 export class EmailService {
@@ -18,6 +19,7 @@ export class EmailService {
     private readonly resendService: ResendService,
     private readonly templateService: TemplateService,
     private readonly collectionsService: CollectionsService, // Инжектируем CollectionsService
+    private readonly i18n: I18nService, // добавление I18nService в сервис
   ) {}
 
   async sendEmailToUsersWithProductInfo(
@@ -59,9 +61,24 @@ export class EmailService {
       const localizedSubject =
         localization[userLanguage]?.subject || emailSubject;
 
+      const tLanguage = userLanguage.toLowerCase();
+
       // Создаем HTML-содержимое письма
       const emailHtmlContent = this.templateService.getNewProductsEmailTemplate(
         {
+          greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
+          footer: {
+            header: this.i18n.t('translation.EmailFooter.header', {
+              lang: tLanguage,
+            }),
+            subheader: this.i18n.t('translation.EmailFooter.subheader', {
+              lang: tLanguage,
+            }),
+            link: this.i18n.t('translation.EmailFooter.link', {
+              lang: tLanguage,
+            }),
+          },
+          button: this.i18n.t('translation.ViewProduct', { lang: tLanguage }),
           username: user.username,
           text: localizedText,
           products: productsForTemplate,
@@ -132,11 +149,25 @@ export class EmailService {
       const localizedSubject =
         localization[userLanguage]?.subject || emailSubject;
 
+      const tLanguage = userLanguage.toLowerCase();
+
       // Создаём HTML-содержимое письма с учётом локализации
       const emailHtmlContent =
         this.templateService.getNewCollectionsEmailTemplate({
           username: user.username,
           text: localizedText,
+          greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
+          footer: {
+            header: this.i18n.t('translation.EmailFooter.header', {
+              lang: tLanguage,
+            }),
+            subheader: this.i18n.t('translation.EmailFooter.subheader', {
+              lang: tLanguage,
+            }),
+            link: this.i18n.t('translation.EmailFooter.link', {
+              lang: tLanguage,
+            }),
+          },
           collections: collectionsForTemplate,
           unsubscribeLink: `https://${client}/dashboard/profile`,
         });

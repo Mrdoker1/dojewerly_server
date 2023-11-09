@@ -13,7 +13,7 @@
     </div>
     <div style="padding: 20px;">
       <div style="margin: 20px 0;">
-        <h2 style="color: #161412; margin-bottom: 0; font-family: 'Jost', sans-serif;">Привет {{username}},</h2>
+        <h2 style="color: #161412; margin-bottom: 0; font-family: 'Jost', sans-serif;">{{greatings}} {{username}},</h2>
         <p style="font-size: 14px; color: #161412; margin-top: 8px; margin-bottom: 32px; font-family: 'Jost', sans-serif;">{{text}}</p>
       </div>
       {{#each collections}}
@@ -31,8 +31,8 @@
       {{/each}}
     </div>
     <div style="background-color: #F4F4F2; padding: 32px 10px; text-align: center; font-size: 13px; font-family: 'Jost', sans-serif;">
-      <p>Sent with ♥ from DoJewelry.shop</p>
-      <p>Getting too many emails? <a href="{{unsubscribeLink}}" style="text-decoration: none; color: inherit;">Unsubscribe</a></p>
+      <p style="font-family: 'Jost', sans-serif;">{{footer.header}}</p>
+      <p style="font-family: 'Jost', sans-serif;">{{footer.subheader}} <a href="{{unsubscribeLink}}" style="text-decoration: none; color: #0080ff;">{{footer.link}}</a></p>
     </div>
   </div>
 </body>

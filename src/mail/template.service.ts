@@ -91,6 +91,13 @@ export class TemplateService {
   public getNewProductsEmailTemplate(data: {
     username: string;
     text: string;
+    greatings: string;
+    button: string;
+    footer: {
+      header: string;
+      subheader: string;
+      link: string;
+    };
     products: Array<{
       name: string;
       price: number;
@@ -105,6 +112,12 @@ export class TemplateService {
   public getNewCollectionsEmailTemplate(data: {
     username: string;
     text: string;
+    greatings: string;
+    footer: {
+      header: string;
+      subheader: string;
+      link: string;
+    };
     collections: Array<{
       name: string;
       description: string;

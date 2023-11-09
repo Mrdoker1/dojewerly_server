@@ -11,7 +11,7 @@
     </div>
     <div style="padding: 10px;">
       <div style="margin: 10px;">
-        <h2 style="margin-top: 24px; margin-bottom: 0; color: #161412; font-family: 'Jost', sans-serif;">Привет {{username}},</h2>
+        <h2 style="margin-top: 24px; margin-bottom: 0; color: #161412; font-family: 'Jost', sans-serif;">{{greatings}} {{username}},</h2>
         <p style="font-size: 14px; color: #161412; font-family: 'Jost', sans-serif; margin-top: 8px;">{{text}}</p>
       </div>
       <table style="width: 100%; max-width: 600px; margin: 20px auto; border-collapse: collapse;">
@@ -25,7 +25,7 @@
                 <div style="margin-top: 6px;">
                   <h3 style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif; overflow: hidden; text-overflow: ellipsis; max-width: 90%; display: inline-block; vertical-align: middle;">{{this.name}}</h3>
                   <p style="margin: 0; padding: 3px 0; color: #000; font-family: 'Jost', sans-serif;">BYN {{this.price}}</p>
-                  <a href="{{this.link}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 6px;">View Product</a>
+                  <a href="{{this.link}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 6px;">{{button}}</a>
                 </div>
               </div>
             </td>
@@ -34,8 +34,8 @@
       </table>
     </div>
     <div style="background-color: #F4F4F2; padding: 32px 10px; text-align: center; font-size: 13px;">
-      <p style="font-family: 'Jost', sans-serif;">Sent with ♥ from DoJewelry.shop</p>
-      <p style="font-family: 'Jost', sans-serif;">Getting too many emails? <a href="{{unsubscribeLink}}" style="text-decoration: none; color: inherit;">Unsubscribe</a></p>
+      <p style="font-family: 'Jost', sans-serif;">{{footer.header}}</p>
+      <p style="font-family: 'Jost', sans-serif;">{{footer.subheader}} <a href="{{unsubscribeLink}}" style="text-decoration: none; color: #0080ff;">{{footer.link}}</a></p>
     </div>
   </div>
 </body>

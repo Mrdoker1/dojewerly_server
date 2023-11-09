@@ -1,0 +1,9 @@
+{
+  "Hello": "Привет",
+  "EmailFooter": {
+    "header": "Отправлено с ♥ из DoJewelry.shop",
+    "subheader": "Получаете слишком много писем?",
+    "link": "Отписаться"
+  },
+  "ViewProduct": "Посмотреть"
+}
