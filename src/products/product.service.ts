@@ -96,7 +96,6 @@ export class ProductsService {
     const products = await this.productModel
       .find({ _id: { $in: productIds } })
       .exec();
-    console.log('Products found for IDs:', products);
     return products;
   }
 
