@@ -5,5 +5,15 @@
     "subheader": "Otrzymujesz zbyt wiele e-maili?",
     "link": "Zrezygnuj z subskrypcji"
   },
-  "ViewProduct": "Patrzeć"
+  "ViewProduct": "Patrzeć",
+  "ConfirmAccountEmail": {
+    "subject": "Proszę potwierdzić swój e-mail!",
+    "textA": "Dziękujemy za rejestrację w",
+    "textB": "Cieszymy się, że do nas dołączyłeś!",
+    "textC": "Aby aktywować swoje konto, kliknij poniższy przycisk:",
+    "textD": "Aktywuj konto",
+    "textE": "Jeśli nie zakładałeś tego konta, możesz zignorować ten e-mail, a konto nie zostanie aktywowane.",
+    "textF": "Pozdrawiamy,",
+    "textG": "Wysłano z ♥ od DoJewelry.shop"
+  }  
 }

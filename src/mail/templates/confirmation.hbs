@@ -10,16 +10,15 @@
       <img src="https://dojewerlyserver-production.up.railway.app/uploads/logo-text.png" alt="DoJewelry" style="display: block; margin: auto; width: 90px;"/>
     </div>
     <div style="padding: 40px 32px; text-align: center;">
-      <h2 style="color: #161412; font-family: 'Jost', sans-serif;">Dear {{username}},</h2>
-      <p style="color: #161412; font-family: 'Jost', sans-serif;">Thank you for registering at <strong>DoJewelry.shop</strong>. We're excited to have you on board!</p>
-      <p style="color: #161412; font-family: 'Jost', sans-serif;">To activate your account please click the button below:</p>
-      <a href="{{activationLink}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 20px 0;">Activate Account</a>
-      <p style="color: #161412; font-family: 'Jost', sans-serif;">If you did not sign up for this account, you can ignore this email and the account will not be activated.</p>
-      <p style="color: #161412; font-family: 'Jost', sans-serif;">Regards,<br><strong>The DoJewelry Team</strong></p>
+      <h2 style="color: #161412; font-family: 'Jost', sans-serif;">{{greatings}} {{username}},</h2>
+      <p style="color: #161412; font-family: 'Jost', sans-serif;">{{confirmAccountEmail.textA}} <strong>DoJewelry.shop</strong>. {{confirmAccountEmail.textB}}</p>
+      <p style="color: #161412; font-family: 'Jost', sans-serif;">{{confirmAccountEmail.textC}}</p>
+      <a href="{{activationLink}}" style="background-color: #000; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin: 20px 0;">{{confirmAccountEmail.textD}}</a>
+      <p style="color: #161412; font-family: 'Jost', sans-serif;">{{confirmAccountEmail.textE}}</p>
+      <p style="color: #161412; font-family: 'Jost', sans-serif;">{{confirmAccountEmail.textF}}<br><strong>The DoJewelry Team</strong></p>
     </div>
     <div style="background-color: #F4F4F2; padding: 32px 10px; text-align: center; font-size: 13px; font-family: 'Jost', sans-serif;">
-      <span>Sent with ♥ from DoJewelry.shop</span><br>
-      <span>Getting too many emails?</span> <a href="{{unsubscribeLink}}" style="text-decoration: none; color: inherit;">Unsubscribe</a>
+      <span>{{confirmAccountEmail.textG}}</span><br>
     </div>
   </div>
 </body>

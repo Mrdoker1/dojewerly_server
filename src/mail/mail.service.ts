@@ -11,6 +11,11 @@ import { CollectionDocument } from '../collections/collections.model';
 import { LocalizedProps } from 'src/mail/mail.controller';
 import { I18nService } from 'nestjs-i18n';
 
+const client = process.env.CLIENT_DOMAIN;
+// const client = 'dojewerly.shop';
+const server = process.env.SERVER_DOMAIN;
+// const server = 'dojewerlyserver-production.up.railway.app';
+
 @Injectable()
 export class EmailService {
   constructor(
@@ -28,10 +33,6 @@ export class EmailService {
     productIds: string[],
     localization: { [key: string]: LocalizedProps },
   ): Promise<User[]> {
-    // const client = process.env.CLIENT_DOMAIN;
-    const client = 'dojewerly.shop';
-    // const server = process.env.SERVER_DOMAIN;
-    const server = 'dojewerlyserver-production.up.railway.app';
     // Получение пользователей, которые согласились получать письма
     const users = await this.userModel.find({ 'settings.email': true }).exec();
 
@@ -107,9 +108,6 @@ export class EmailService {
     collectionIds: string[],
     localization: { [key: string]: LocalizedProps },
   ): Promise<User[]> {
-    const client = 'dojewerly.shop';
-    const server = 'dojewerlyserver-production.up.railway.app';
-
     // Получаем пользователей, которые согласились на получение рассылки
     const users = await this.userModel.find({ 'settings.email': true }).exec();
 

@@ -5,5 +5,15 @@
     "subheader": "Getting too many emails?",
     "link": "Unsubscribe"
   },
-  "ViewProduct": "View Product"
+  "ViewProduct": "View Product",
+  "ConfirmAccountEmail": {
+    "subject": "Please confirm your email!",
+    "textA": "Thank you for registering at",
+    "textB": "We're excited to have you on board!",
+    "textC": "To activate your account please click the button below:",
+    "textD": "Activate Account",
+    "textE": "If you did not sign up for this account, you can ignore this email and the account will not be activated.",
+    "textF": "Regards,",
+    "textG": "Sent with ♥ from DoJewelry.shop"
+  }
 }

@@ -5,5 +5,15 @@
     "subheader": "Erhalten Sie zu viele E-Mails?",
     "link": "Abbestellen"
   },
-  "ViewProduct": "Produkt anzeigen"
+  "ViewProduct": "Produkt anzeigen",
+  "ConfirmAccountEmail": {
+    "subject": "Bitte bestätigen Sie Ihre E-Mail!",
+    "textA": "Vielen Dank für Ihre Registrierung bei",
+    "textB": "Wir freuen uns, dass Sie dabei sind!",
+    "textC": "Um Ihr Konto zu aktivieren, klicken Sie bitte auf den unten stehenden Button:",
+    "textD": "Konto aktivieren",
+    "textE": "Wenn Sie sich nicht für dieses Konto angemeldet haben, können Sie diese E-Mail ignorieren und das Konto wird nicht aktiviert.",
+    "textF": "Mit freundlichen Grüßen,",
+    "textG": "Gesendet mit ♥ von DoJewelry.shop"
+  }  
 }

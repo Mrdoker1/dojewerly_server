@@ -36,6 +36,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ResendService } from 'nestjs-resend';
 import { TemplateService } from '../mail/template.service';
 import { Response } from 'express';
+import { I18nService } from 'nestjs-i18n';
 
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
 @Controller('users')
@@ -44,6 +45,7 @@ export class UserController {
     private readonly userService: UserService,
     private readonly resendService: ResendService,
     private readonly templateService: TemplateService,
+    private readonly i18n: I18nService, // добавление I18nService в сервис
   ) {}
 
   @Get()
@@ -124,10 +126,36 @@ export class UserController {
     // Создание пользователя
     const newUser = await this.userService.createUser(createUserDto);
 
+    const tLanguage = 'ru';
+
     // Подготовка и отправка письма
     const confirmUrl = `https://${server}/users/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
     const htmlContent = this.templateService.getConfirmationTemplate({
       username: newUser.username,
+      greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
+      confirmAccountEmail: {
+        textA: this.i18n.t('translation.ConfirmAccountEmail.textA', {
+          lang: tLanguage,
+        }),
+        textB: this.i18n.t('translation.ConfirmAccountEmail.textB', {
+          lang: tLanguage,
+        }),
+        textC: this.i18n.t('translation.ConfirmAccountEmail.textC', {
+          lang: tLanguage,
+        }),
+        textD: this.i18n.t('translation.ConfirmAccountEmail.textD', {
+          lang: tLanguage,
+        }),
+        textE: this.i18n.t('translation.ConfirmAccountEmail.textE', {
+          lang: tLanguage,
+        }),
+        textF: this.i18n.t('translation.ConfirmAccountEmail.textF', {
+          lang: tLanguage,
+        }),
+        textG: this.i18n.t('translation.ConfirmAccountEmail.textG', {
+          lang: tLanguage,
+        }),
+      },
       activationLink: confirmUrl,
       unsubscribeLink: `https://${client}/dashboard/profile`,
     });
@@ -135,7 +163,9 @@ export class UserController {
     await this.resendService.send({
       from: '"DoJewelry" <support@dojewerly.shop>',
       to: newUser.email,
-      subject: 'Please confirm your DoJewerly email!',
+      subject: this.i18n.t('translation.ConfirmAccountEmail.subject', {
+        lang: tLanguage,
+      }),
       html: htmlContent,
     });
 

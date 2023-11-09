@@ -75,6 +75,16 @@ export class TemplateService {
 
   public getConfirmationTemplate(data: {
     username: string;
+    greatings: string;
+    confirmAccountEmail: {
+      textA: string;
+      textB: string;
+      textC: string;
+      textD: string;
+      textE: string;
+      textF: string;
+      textG: string;
+    };
     unsubscribeLink: string;
     activationLink: string;
   }): string {
