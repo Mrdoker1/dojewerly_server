@@ -18,19 +18,11 @@ export class ProductsService {
 
   private filterQuery(params) {
     let query = this.productModel.find();
-    // Search by keyword
-    // if (params.q) {
-    //   query = query.find({ name: { $regex: params.q, $options: 'i' } });
-    // }
-    // if (params.q) {
-    //   query = query.find({
-    //     $or: [
-    //       { name: { $regex: params.q, $options: 'i' } },
-    //       { 'props.description': { $regex: params.q, $options: 'i' } },
-    //       { 'props.info': { $regex: params.q, $options: 'i' } },
-    //     ],
-    //   });
-    // }
+
+    // Exclude products with 'Unavailable' availability
+    if (!JSON.parse(params.includeUnavailable || 'false')) {
+      query = query.find({ 'props.availability': { $ne: 'Unavailable' } });
+    }
 
     if (params.q) {
       query = query.find({
@@ -111,11 +103,12 @@ export class ProductsService {
     limit?: number;
     material?: string;
     gender?: string;
-    availability?: string;
+    availability?: 'Available' | 'Preorder' | 'Unavailable';
     stock?: number;
     type?: string;
     minPrice?: number;
     maxPrice?: number;
+    includeUnavailable?: boolean;
   }): Promise<ProductDocument[]> {
     return this.filterQuery(params).exec();
   }

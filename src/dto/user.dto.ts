@@ -22,6 +22,11 @@ export class UpdateUserDto {
     type: Object,
   })
   settings?: { email?: boolean; language?: string };
+  @ApiPropertyOptional({
+    example: 10, // ПРИМЕР ЗНАЧЕНИЯ
+    description: 'Discount for the user account', // ОПИСАНИЕ
+  })
+  discount?: number; // НОВОЕ ПОЛЕ
 }
 
 export class UpdateProfileDto {
@@ -75,4 +80,11 @@ export class CreateUserDto {
     type: Object,
   })
   settings: { email: boolean; language: string };
+
+  @ApiProperty({
+    example: 0, // ПРИМЕР ЗНАЧЕНИЯ
+    description: 'Initial discount for the user account', // ОПИСАНИЕ
+    default: 0, // ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ
+  })
+  discount: number;
 }

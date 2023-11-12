@@ -82,6 +82,7 @@ export class ProductsController {
   @ApiQuery({ name: 'type', required: false })
   @ApiQuery({ name: 'minPrice', required: false })
   @ApiQuery({ name: 'maxPrice', required: false })
+  @ApiQuery({ name: 'includeUnavailable', required: false })
   async getProducts(
     @Query('sort') sort: string,
     @Query('order') order: 'asc' | 'desc',
@@ -90,11 +91,13 @@ export class ProductsController {
     @Query('limit') limit: number,
     @Query('material') material: string,
     @Query('gender') gender: string,
-    @Query('availability') availability: string,
+    @Query('availability')
+    availability: 'Unavailable' | 'Available' | 'Preorder',
     @Query('stock') stock: number,
     @Query('type') type: string,
     @Query('minPrice') minPrice: number,
     @Query('maxPrice') maxPrice: number,
+    @Query('includeUnavailable') includeUnavailable: boolean,
   ): Promise<ProductDocument[]> {
     return this.productsService.findAll({
       sort,
@@ -109,6 +112,7 @@ export class ProductsController {
       type,
       minPrice,
       maxPrice,
+      includeUnavailable,
     });
   }
 
@@ -126,6 +130,7 @@ export class ProductsController {
   @ApiQuery({ name: 'type', required: false })
   @ApiQuery({ name: 'minPrice', required: false })
   @ApiQuery({ name: 'maxPrice', required: false })
+  @ApiQuery({ name: 'includeUnavailable', required: false })
   async getTotalProductsCount(@Query() queryParams): Promise<number> {
     return this.productsService.countFiltered(queryParams);
   }
