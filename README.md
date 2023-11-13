@@ -1,4 +1,4 @@
-# Project Server
+# DoJewerly Server
 
 Tools:
 * Nest JS
