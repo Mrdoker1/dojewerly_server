@@ -12,8 +12,9 @@ import { LocalizedProps } from 'src/mail/mail.controller';
 import { I18nService } from 'nestjs-i18n';
 
 const client = process.env.CLIENT_DOMAIN;
-// const client = 'dojewerly.shop';
 const server = process.env.SERVER_DOMAIN;
+
+// const client = 'dojewerly.shop';
 // const server = 'dojewerlyserver-production.up.railway.app';
 
 @Injectable()
@@ -43,6 +44,12 @@ export class EmailService {
     for (const user of users) {
       const userLanguage = user.settings.language || 'EN'; // Получаем предпочтительный язык пользователя, или используем 'en' как язык по умолчанию
 
+      // Формируем текст и тему письма на предпочтительном языке пользователя
+      const localizedText = localization[userLanguage]?.text || emailText;
+      const localizedSubject =
+        localization[userLanguage]?.subject || emailSubject;
+      const tLanguage = userLanguage.toLowerCase();
+
       // Формирование данных о продуктах для шаблона
       const productsForTemplate = products.map((product) => {
         const localizedProduct =
@@ -54,15 +61,11 @@ export class EmailService {
           price: product.price,
           imageURL: `https://${server}/uploads/${product.imageURLs[0]}`,
           link: `https://${client}/product/${product._id}`,
+          CTA: this.i18n.t('translation.ViewProduct', {
+            lang: tLanguage,
+          }),
         };
       });
-
-      // Формируем текст и тему письма на предпочтительном языке пользователя
-      const localizedText = localization[userLanguage]?.text || emailText;
-      const localizedSubject =
-        localization[userLanguage]?.subject || emailSubject;
-
-      const tLanguage = userLanguage.toLowerCase();
 
       // Создаем HTML-содержимое письма
       const emailHtmlContent = this.templateService.getNewProductsEmailTemplate(
@@ -79,9 +82,6 @@ export class EmailService {
               lang: tLanguage,
             }),
           },
-          buttonCTA: this.i18n.t('translation.ViewProduct', {
-            lang: tLanguage,
-          }),
           username: user.username,
           text: localizedText,
           products: productsForTemplate,

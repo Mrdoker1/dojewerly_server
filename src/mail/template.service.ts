@@ -102,7 +102,6 @@ export class TemplateService {
     username: string;
     text: string;
     greatings: string;
-    buttonCTA: string;
     footer: {
       header: string;
       subheader: string;
@@ -113,6 +112,7 @@ export class TemplateService {
       price: number;
       imageURL: string;
       link: string;
+      CTA: string;
     }>;
     unsubscribeLink: string;
   }): string {
