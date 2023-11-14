@@ -102,7 +102,7 @@ export class TemplateService {
     username: string;
     text: string;
     greatings: string;
-    button: string;
+    buttonCTA: string;
     footer: {
       header: string;
       subheader: string;

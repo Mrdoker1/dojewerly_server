@@ -79,7 +79,9 @@ export class EmailService {
               lang: tLanguage,
             }),
           },
-          button: this.i18n.t('translation.ViewProduct', { lang: tLanguage }),
+          buttonCTA: this.i18n.t('translation.ViewProduct', {
+            lang: tLanguage,
+          }),
           username: user.username,
           text: localizedText,
           products: productsForTemplate,
