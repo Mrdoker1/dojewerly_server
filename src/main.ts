@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { setupSwagger } from './swagger';
+import fetch from 'node-fetch';
 
 // Использование переменной среды PORT, если она установлена, в противном случае фоллбэк на 4000
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 80;
+global.Headers = fetch.Headers;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
