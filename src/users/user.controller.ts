@@ -132,6 +132,7 @@ export class UserController {
     const confirmUrl = `https://${server}/users/confirm/${newUser.id}`; // Замените на вашу логику подтверждения
     const htmlContent = this.templateService.getConfirmationTemplate({
       username: newUser.username,
+      logoLink: `https://${server}/uploads/logo-text.png`,
       greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
       confirmAccountEmail: {
         textA: this.i18n.t('translation.ConfirmAccountEmail.textA', {
@@ -272,6 +273,7 @@ export class UserController {
 
     // Если аккаунт активирован, используйте новый шаблон
     const htmlContent = this.templateService.getActivationSuccessTemplate({
+      logoLink: `https://${server}/uploads/logo-text.png`,
       username: user.username,
       loginLink: `https://${client}/signin`,
     });

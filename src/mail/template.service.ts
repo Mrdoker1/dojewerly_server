@@ -76,6 +76,7 @@ export class TemplateService {
   public getConfirmationTemplate(data: {
     username: string;
     greatings: string;
+    logoLink: string;
     confirmAccountEmail: {
       textA: string;
       textB: string;
@@ -93,6 +94,7 @@ export class TemplateService {
 
   public getActivationSuccessTemplate(data: {
     username: string;
+    logoLink: string;
     loginLink: string;
   }): string {
     return this.compileTemplate('activation-success', data);
@@ -102,6 +104,7 @@ export class TemplateService {
     username: string;
     text: string;
     greatings: string;
+    logoLink: string;
     footer: {
       header: string;
       subheader: string;
@@ -123,6 +126,7 @@ export class TemplateService {
     username: string;
     text: string;
     greatings: string;
+    logoLink: string;
     footer: {
       header: string;
       subheader: string;

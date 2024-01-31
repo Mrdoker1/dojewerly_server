@@ -71,6 +71,7 @@ export class EmailService {
       const emailHtmlContent = this.templateService.getNewProductsEmailTemplate(
         {
           greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
+          logoLink: `https://${server}/uploads/logo-text.png`,
           footer: {
             header: this.i18n.t('translation.EmailFooter.header', {
               lang: tLanguage,
@@ -156,6 +157,7 @@ export class EmailService {
         this.templateService.getNewCollectionsEmailTemplate({
           username: user.username,
           text: localizedText,
+          logoLink: `https://${server}/uploads/logo-text.png`,
           greatings: this.i18n.t('translation.Hello', { lang: tLanguage }),
           footer: {
             header: this.i18n.t('translation.EmailFooter.header', {
