@@ -38,6 +38,9 @@ import { TemplateService } from '../mail/template.service';
 import { Response } from 'express';
 import { I18nService } from 'nestjs-i18n';
 
+const server = process.env.SERVER_DOMAIN;
+const client = process.env.CLIENT_DOMAIN;
+
 @ApiTags('Users') // Первый добавленный тег будет вкладкой по умолчанию
 @Controller('users')
 export class UserController {
@@ -120,9 +123,6 @@ export class UserController {
       throw new BadRequestException('Email is already taken!');
     }
 
-    const server = process.env.SERVER_DOMAIN;
-    const client = process.env.CLIENT_DOMAIN;
-
     // Создание пользователя
     const newUser = await this.userService.createUser(createUserDto);
 
@@ -161,7 +161,7 @@ export class UserController {
     });
 
     await this.resendService.send({
-      from: '"DoJewelry" <support@dojewerly.shop>',
+      from: `"DoJewelry" <support@>${server}`,
       to: newUser.email,
       subject: this.i18n.t('translation.ConfirmAccountEmail.subject', {
         lang: tLanguage,
@@ -273,7 +273,7 @@ export class UserController {
     // Если аккаунт активирован, используйте новый шаблон
     const htmlContent = this.templateService.getActivationSuccessTemplate({
       username: user.username,
-      loginLink: `https://${process.env.CLIENT_DOMAIN}/signin`,
+      loginLink: `https://${client}/signin`,
     });
 
     res.send(htmlContent);

@@ -85,7 +85,7 @@ export class EmailService {
           username: user.username,
           text: localizedText,
           products: productsForTemplate,
-          unsubscribeLink: `https://${client}/dashboard/profile`,
+          unsubscribeLink: `https://${server}/dashboard/profile`,
         },
       );
 
@@ -95,7 +95,7 @@ export class EmailService {
 
       // Используйте ваш механизм отправки
       await this.resendService.send({
-        from: `"Катя DoJewelry" <marketing@${client}>`,
+        from: `"Катя DoJewelry" <marketing@${server}>`,
         to: user.email,
         subject: localizedSubject,
         html: emailHtmlContent,
