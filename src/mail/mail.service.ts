@@ -95,7 +95,7 @@ export class EmailService {
 
       // Используйте ваш механизм отправки
       await this.resendService.send({
-        from: '"Катя DoJewelry" <marketing@dojewerly.shop>',
+        from: `"Катя DoJewelry" <marketing@${client}>`,
         to: user.email,
         subject: localizedSubject,
         html: emailHtmlContent,
@@ -174,7 +174,7 @@ export class EmailService {
 
       // Отправляем электронное письмо
       await this.resendService.send({
-        from: '"Катя DoJewelry" <marketing@dojewerly.shop>',
+        from: `"Катя DoJewelry" <marketing@${client}>`,
         to: user.email,
         subject: localizedSubject,
         html: emailHtmlContent,
