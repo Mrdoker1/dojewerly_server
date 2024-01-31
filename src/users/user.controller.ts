@@ -161,7 +161,7 @@ export class UserController {
     });
 
     await this.resendService.send({
-      from: `"DoJewelry" <support@>${server}`,
+      from: `"DoJewelry" <support@${server}>`,
       to: newUser.email,
       subject: this.i18n.t('translation.ConfirmAccountEmail.subject', {
         lang: tLanguage,
